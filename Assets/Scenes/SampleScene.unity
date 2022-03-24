@@ -643,8 +643,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 500
   maxSpeed: 0
-  jumpStrength: 10
-  dashSpeed: 0
+  jumpStrength: 900
+  dashSpeed: 10
   dashDuration: 0.15
   turnSpeed: 0
   extraGravity: 5
@@ -653,15 +653,15 @@ MonoBehaviour:
   wallrunForce: 0
   wallHopForce: 0
   speedMultiplier: 1.3
-  AIR_DRAG: 0
-  COUNTER_DRAG: 0
-  SLIDING_DRAG: 0
+  AIR_DRAG: 5
+  COUNTER_DRAG: 6
+  SLIDING_DRAG: 5
   groundCheck: {fileID: 259504498}
-  checkRadius: 0.1
+  checkRadius: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  grounded: 0
+  grounded: 1
   dashParticles: {fileID: 0}
   anim: {fileID: 0}
   cam: {fileID: 963194225}
@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 250
-  playerBody: {fileID: 1729085828}
+  playerBody: {fileID: 583588772}
 --- !u!43 &1275498032
 Mesh:
   m_ObjectHideFlags: 0
