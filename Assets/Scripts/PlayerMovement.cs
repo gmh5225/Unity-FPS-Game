@@ -62,9 +62,9 @@ public class PlayerMovement : MonoBehaviour
 	public bool grounded;
 
 	[Header("E.t.c.")]
-	public ParticleSystem dashParticles;
+	//public ParticleSystem dashParticles;
 
-	public Animator anim;
+	//public Animator anim;
 
 	public GameObject cam;
 
@@ -198,11 +198,11 @@ public class PlayerMovement : MonoBehaviour
 		{
 			return;
 		}
-		anim.enabled = true;
-		if (!anim.GetBool("reloading"))
-		{
-			anim.SetTrigger("jump");
-		}
+		//anim.enabled = true;
+		//if (!anim.GetBool("reloading"))
+		//{
+		//	anim.SetTrigger("jump");
+		//}
 		if (isWallRunning)
 		{
 			if (isWallRight)
@@ -331,7 +331,7 @@ public class PlayerMovement : MonoBehaviour
 			rb.velocity = -base.transform.right * dashSpeed;
 		}
 		rb.useGravity = false;
-		dashParticles.Play();
+		//dashParticles.Play();
 		//visualFX.dashFX(dashDuration);
 		yield return new WaitForSeconds(dashDuration);
 		EndDash();
@@ -339,7 +339,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void EndDash()
 	{
-		dashParticles.Stop();
+		//dashParticles.Stop();
 		rb.useGravity = true;
 		float maxLength = maxSpeed + 5f;
 		Vector3 vector = Vector3.ClampMagnitude(new Vector3(rb.velocity.x, 0f, rb.velocity.z), maxLength);

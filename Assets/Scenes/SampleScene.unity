@@ -642,11 +642,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 500
-  maxSpeed: 0
+  maxSpeed: 10
   jumpStrength: 900
   dashSpeed: 10
   dashDuration: 0.15
-  turnSpeed: 0
+  turnSpeed: 555
   extraGravity: 5
   tiltAngle: 0
   tiltSmooth: 0
@@ -662,8 +662,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   grounded: 1
-  dashParticles: {fileID: 0}
-  anim: {fileID: 0}
   cam: {fileID: 963194225}
   walking: 0
 --- !u!1 &705507993
@@ -855,7 +853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0712e041d555d964480ed8953ceacf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 250
+  sensitivity: 500
   playerBody: {fileID: 583588772}
 --- !u!43 &1275498032
 Mesh:
