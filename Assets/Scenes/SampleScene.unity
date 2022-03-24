@@ -848,7 +848,7 @@ GameObject:
   - component: {fileID: 2030110728}
   - component: {fileID: 2030110727}
   - component: {fileID: 2030110729}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: killZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
