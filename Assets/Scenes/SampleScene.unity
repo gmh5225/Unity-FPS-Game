@@ -177,7 +177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 230270164}
   m_LocalRotation: {x: 0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 25, y: 0, z: -25}
+  m_LocalPosition: {x: 25, y: 2.03, z: -25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967294
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &264255161
 Transform:
@@ -616,19 +616,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583588771}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a4d10eea4286c44a8ec7d7d21107786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchSpeed: 0
-  tiltAngle: 0
+  launchSpeed: 5
+  tiltAngle: 20
   tiltSmooth: 0
-  crouchPosition: {fileID: 0}
+  crouchPosition: {fileID: 3048459}
   isSliding: 0
   innerCol: {fileID: 0}
   outerCol: {fileID: 0}
-  cam: {fileID: 0}
+  cam: {fileID: 963194225}
 --- !u!114 &583588777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,13 +641,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d49b7d885f6ebe4bafe611b3a025d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 500
   maxSpeed: 0
   jumpStrength: 10
   dashSpeed: 0
   dashDuration: 0.15
   turnSpeed: 0
-  extraGravity: 0
+  extraGravity: 5
   tiltAngle: 0
   tiltSmooth: 0
   wallrunForce: 0
@@ -657,14 +657,14 @@ MonoBehaviour:
   COUNTER_DRAG: 0
   SLIDING_DRAG: 0
   groundCheck: {fileID: 259504498}
-  checkRadius: 0
+  checkRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   grounded: 0
   dashParticles: {fileID: 0}
   anim: {fileID: 0}
-  cam: {fileID: 0}
+  cam: {fileID: 963194225}
   walking: 0
 --- !u!1 &705507993
 GameObject:
@@ -863,7 +863,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5530
+  m_Name: pb_Mesh23194
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
