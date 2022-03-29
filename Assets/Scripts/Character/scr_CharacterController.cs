@@ -140,7 +140,7 @@ public class scr_CharacterController : MonoBehaviour
             currentStance = playerProneStance;
         }
 
-        cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, currentStance.Cameraheight, ref cameraHeightVelocity, playerStanceSmoothing);
+        cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, currentStance.CameraHeight, ref cameraHeightVelocity, playerStanceSmoothing);
         cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, cameraHeight, cameraHolder.localPosition.z);
 
         characterController.height = Mathf.SmoothDamp(characterController.height, currentStance.StanceCollider.height, ref stanceCapsuleHeightVelocity, playerStanceSmoothing);

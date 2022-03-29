@@ -41,7 +41,7 @@ public static class Models
     [Serializable]
     public class CharacterStance
     {
-        public float Cameraheight;
+        public float CameraHeight;
         public CapsuleCollider StanceCollider;
 
     }
