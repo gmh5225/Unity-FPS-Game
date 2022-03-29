@@ -35,17 +35,21 @@ public static class Models
         public float RunningForwardSpeed;
         public float RunningStrafeSpeed;
 
-
-
         [Header("Movement - Walking")]
         public float WalkingForwardSpeed;
         public float WalkingBackwardSpeed;
         public float WalkingStrafeSpeed;
 
-
         [Header("Jumping")]
         public float JumpingHeight;
         public float JumpingFallof;
+        public float FallingSmoothing;
+
+        [Header("Speed Effectors")]
+        public float SpeedEffector = 1;
+        public float CrouchSpeedEffector;
+        public float ProneSpeedEffector;
+        public float FallingSpeedEffector;
     }
 
     [Serializable]

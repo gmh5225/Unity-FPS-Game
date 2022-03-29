@@ -46,8 +46,10 @@ public class scr_CharacterController : MonoBehaviour
 
     private Vector3 stanceCapsuleCenterVelocity;
     private float stanceCapsuleHeightVelocity;
-
+    [HideInInspector]
     private bool isSprinting;
+    [HideInInspector]
+    public bool isCrouching;
 
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
@@ -118,7 +120,24 @@ public class scr_CharacterController : MonoBehaviour
             horizontalSpeed = playerSettings.RunningStrafeSpeed;
         }
 
-        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horizontalSpeed * input_Movement.x * Time.deltaTime, 0, verticalSpeed * input_Movement.y * Time.deltaTime), ref newMovementSpeedVelocity,playerSettings.MovementSmoothing);
+        if (characterController.isGrounded)
+        {
+            playerSettings.SpeedEffector = playerSettings.FallingSpeedEffector;
+        }
+        else if (playerStance == PlayerStance.Crouch)
+        {
+            playerSettings.SpeedEffector = playerSettings.CrouchSpeedEffector;
+        }
+        else if (playerStance == PlayerStance.Prone)
+        {
+            playerSettings.SpeedEffector = playerSettings.ProneSpeedEffector;
+        }
+        else
+        {
+            playerSettings.SpeedEffector = 1;
+        }
+
+        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horizontalSpeed * input_Movement.x * Time.deltaTime, 0, verticalSpeed * input_Movement.y * Time.deltaTime), ref newMovementSpeedVelocity, characterController.isGrounded ? playerSettings.MovementSmoothing : playerSettings.FallingSmoothing);
         var movementSpeed = transform.TransformDirection(newMovementSpeed);
 
         if (playerGravity > gravityMin)
@@ -169,16 +188,27 @@ public class scr_CharacterController : MonoBehaviour
         if (!characterController.isGrounded)
         {
             return;
-        }    
-        
+        }
+
         if (playerStance == PlayerStance.Crouch)
         {
+            if (StanceCheck(playerStandStance.StanceCollider.height))
+            {
+                return;
+            }
+
             playerStance = PlayerStance.Stand;
+            isCrouching = !isCrouching;
             return;
         }
 
         if (playerStance == PlayerStance.Prone)
         {
+            if (StanceCheck(playerStandStance.StanceCollider.height))
+            {
+                return;
+            }
+
             playerStance = PlayerStance.Stand;
             return;
         }
@@ -193,13 +223,15 @@ public class scr_CharacterController : MonoBehaviour
     {
         if(playerStance == PlayerStance.Crouch)
         {
+            isCrouching = !isCrouching;
+
             if (StanceCheck(playerStandStance.StanceCollider.height))
             {
                 return;
             }
 
             playerStance = PlayerStance.Stand;
-            return;
+            isCrouching = !isCrouching;
         }
 
         if (StanceCheck(playerCrouchStance.StanceCollider.height))
@@ -207,12 +239,15 @@ public class scr_CharacterController : MonoBehaviour
             return;
         }
 
+        isCrouching = !isCrouching;
         playerStance = PlayerStance.Crouch;
+        return;
     }
 
     private void Prone()
     {
         playerStance = PlayerStance.Prone;
+        isCrouching = !isCrouching;
     }
 
     private bool StanceCheck(float stanceCheckheight)

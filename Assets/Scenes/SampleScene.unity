@@ -773,7 +773,6 @@ MonoBehaviour:
     ViewXInverted: 0
     ViewYInverted: 0
     SprintingHold: 1
-    CrouchingHold: 0
     MovementSmoothing: 0.2
     RunningForwardSpeed: 8
     RunningStrafeSpeed: 4
