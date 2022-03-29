@@ -772,8 +772,11 @@ MonoBehaviour:
     ViewYSensitivity: 20
     ViewXInverted: 0
     ViewYInverted: 0
-    RunningForwardSpeed: 10
-    RunningStrafeSpeed: 6
+    SprintingHold: 1
+    CrouchingHold: 0
+    MovementSmoothing: 0.2
+    RunningForwardSpeed: 8
+    RunningStrafeSpeed: 4
     WalkingForwardSpeed: 4
     WalkingBackwardSpeed: 2
     WalkingStrafeSpeed: 3
