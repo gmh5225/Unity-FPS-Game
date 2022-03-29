@@ -224,7 +224,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 264255160}
-  m_Material: {fileID: 13400000, guid: 60978f3b1e0efaf4197babb59926cf42, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -772,6 +772,8 @@ MonoBehaviour:
     ViewYSensitivity: 20
     ViewXInverted: 0
     ViewYInverted: 0
+    RunningForwardSpeed: 10
+    RunningStrafeSpeed: 6
     WalkingForwardSpeed: 4
     WalkingBackwardSpeed: 2
     WalkingStrafeSpeed: 3
@@ -788,13 +790,13 @@ MonoBehaviour:
   playerStance: 0
   playerStanceSmoothing: 0.15
   playerStandStance:
-    Cameraheight: 0.74
+    CameraHeight: 0
     StanceCollider: {fileID: 368832843}
   playerCrouchStance:
-    Cameraheight: -0.1
+    CameraHeight: 0
     StanceCollider: {fileID: 368832842}
   playerProneStance:
-    Cameraheight: -0.7
+    CameraHeight: 0
     StanceCollider: {fileID: 368832841}
 --- !u!143 &583588778
 CharacterController:
@@ -1157,7 +1159,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18056
+  m_Name: pb_Mesh17150
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
