@@ -773,6 +773,7 @@ MonoBehaviour:
     ViewXInverted: 0
     ViewYInverted: 0
     SprintingHold: 1
+    CrouchingHold: 0
     MovementSmoothing: 0.2
     RunningForwardSpeed: 8
     RunningStrafeSpeed: 4
@@ -781,6 +782,11 @@ MonoBehaviour:
     WalkingStrafeSpeed: 3
     JumpingHeight: 5
     JumpingFallof: 0.4
+    FallingSmoothing: 0
+    SpeedEffector: 1
+    CrouchSpeedEffector: 0
+    ProneSpeedEffector: 0
+    FallingSpeedEffector: 0
   viewClampYmin: -70
   viewClampYmax: 80
   playerMask:
@@ -792,14 +798,15 @@ MonoBehaviour:
   playerStance: 0
   playerStanceSmoothing: 0.15
   playerStandStance:
-    CameraHeight: 0
+    CameraHeight: 0.74
     StanceCollider: {fileID: 368832843}
   playerCrouchStance:
-    CameraHeight: 0
+    CameraHeight: -0.1
     StanceCollider: {fileID: 368832842}
   playerProneStance:
-    CameraHeight: 0
+    CameraHeight: -0.7
     StanceCollider: {fileID: 368832841}
+  isCrouching: 0
 --- !u!143 &583588778
 CharacterController:
   m_ObjectHideFlags: 0
