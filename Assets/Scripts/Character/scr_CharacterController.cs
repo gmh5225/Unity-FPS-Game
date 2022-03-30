@@ -8,10 +8,11 @@ public class scr_CharacterController : MonoBehaviour
     private CharacterController characterController;
     private DefaultInput defaultInput;
     private Vector2 input_Movement;
-    private Vector2 input_View;
+    [HideInInspector]
+    public Vector2 input_View;
 
     private Vector3 newCameraRotation;
-    private Vector3 newPlayerRotation;
+    private Vector3 newCharacterRotation;
 
 
     [Header("References")]
@@ -54,6 +55,8 @@ public class scr_CharacterController : MonoBehaviour
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
 
+    [Header("Weapon")]
+    public scr_WeaponController currentWeapon;
 
     private void Awake()
     {
@@ -70,11 +73,16 @@ public class scr_CharacterController : MonoBehaviour
         defaultInput.Enable();
 
         newCameraRotation = cameraHolder.localRotation.eulerAngles;
-        newPlayerRotation = transform.localRotation.eulerAngles;
+        newCharacterRotation = transform.localRotation.eulerAngles;
 
         characterController = GetComponent<CharacterController>();
 
         cameraHeight = cameraHolder.localPosition.y;
+
+        if (currentWeapon)
+        {
+            currentWeapon.Initialise(this);
+        }
     }
 
 
@@ -92,8 +100,8 @@ public class scr_CharacterController : MonoBehaviour
     private void CalculateView()
     {
 
-        newPlayerRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.deltaTime;
-        transform.localRotation = Quaternion.Euler(newPlayerRotation);
+        newCharacterRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.deltaTime;
+        transform.localRotation = Quaternion.Euler(newCharacterRotation);
 
 
         newCameraRotation.x += playerSettings.ViewYSensitivity * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.deltaTime;
