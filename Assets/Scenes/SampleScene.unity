@@ -743,7 +743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583588771}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.35, y: 2.35, z: -12.248}
+  m_LocalPosition: {x: 36.35, y: 5.28, z: -12.248}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 368832840}
@@ -776,17 +776,17 @@ MonoBehaviour:
     CrouchingHold: 0
     MovementSmoothing: 0.2
     RunningForwardSpeed: 8
-    RunningStrafeSpeed: 4
+    RunningStrafeSpeed: 6
     WalkingForwardSpeed: 4
     WalkingBackwardSpeed: 2
     WalkingStrafeSpeed: 3
     JumpingHeight: 5
     JumpingFallof: 0.4
-    FallingSmoothing: 0
+    FallingSmoothing: 0.4
     SpeedEffector: 1
-    CrouchSpeedEffector: 0
-    ProneSpeedEffector: 0
-    FallingSpeedEffector: 0
+    CrouchSpeedEffector: 0.6
+    ProneSpeedEffector: 0.3
+    FallingSpeedEffector: 0.4
   viewClampYmin: -70
   viewClampYmax: 80
   playerMask:
@@ -1168,7 +1168,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17150
+  m_Name: pb_Mesh18072
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
