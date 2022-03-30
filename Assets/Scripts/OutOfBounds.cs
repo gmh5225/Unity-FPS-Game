@@ -4,6 +4,14 @@ public class OutOfBounds : MonoBehaviour
 {
 	public Transform respawnPoint;
 
+	private void Start()
+	{
+	}
+
+	private void Update()
+	{
+	}
+
 	private void OnCollisionEnter(Collision col)
 	{
 		if (col.gameObject.name == "Player")

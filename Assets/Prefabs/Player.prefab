@@ -155,7 +155,7 @@ MonoBehaviour:
   gravityMin: -3
   jumpingForce: {x: 0, y: 0, z: 0}
   playerStance: 0
-  playerStanceSmoothing: 0.15
+  playerStanceSmoothing: 0.25
   playerStandStance:
     CameraHeight: 0.74
     StanceCollider: {fileID: 3250171849433263038}
