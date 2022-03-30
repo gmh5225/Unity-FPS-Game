@@ -147,14 +147,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196838951}
-  m_LocalRotation: {x: -0.036728762, y: 0.99917215, z: -0.017464153, w: 0.001059896}
+  m_LocalRotation: {x: -0.036730614, y: 0.999172, z: -0.017468296, w: 0.0010600743}
   m_LocalPosition: {x: 0.1505, y: -0.2459, z: 0.6577}
   m_LocalScale: {x: 0.049999997, y: 0.05, z: 0.049999997}
   m_Children:
   - {fileID: 779394026}
   m_Father: {fileID: 1990453575}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.996, y: 179.805, z: -4.214}
 --- !u!114 &196838953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,8 +168,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-    swayAmount: 1
-    swaySmoothing: 1
+    SwayAmount: 6
+    SwayYInverted: 0
+    SwayXInverted: 0
+    SwaySmoothing: 0.1
+    SwayResetSmoothing: 0.1
+    SwayClampX: 4
+    SwayClampY: 4
 --- !u!108 &705507994 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 555610440293894434, guid: d622e6fe65d269d4a89f06adc976c3ea, type: 3}
@@ -677,6 +682,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3250171848742306128, guid: 032c8e909f69b8e41b3c21ee5737ea8b, type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 196838953}
     - target: {fileID: 3250171848742306129, guid: 032c8e909f69b8e41b3c21ee5737ea8b, type: 3}
       propertyPath: m_RootOrder
       value: 1
