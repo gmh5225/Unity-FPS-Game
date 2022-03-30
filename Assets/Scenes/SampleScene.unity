@@ -475,15 +475,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1813284541091274964, guid: c883df17070b12c4f965153182c244d0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1813284541091274964, guid: c883df17070b12c4f965153182c244d0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1813284541091274964, guid: c883df17070b12c4f965153182c244d0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1813284541091274965, guid: c883df17070b12c4f965153182c244d0, type: 3}
       propertyPath: m_Sprite
@@ -587,6 +587,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3250171848742306128, guid: 032c8e909f69b8e41b3c21ee5737ea8b, type: 3}
+      propertyPath: playerStance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3250171848742306128, guid: 032c8e909f69b8e41b3c21ee5737ea8b, type: 3}
+      propertyPath: playerStanceSmoothing
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3250171848742306129, guid: 032c8e909f69b8e41b3c21ee5737ea8b, type: 3}
       propertyPath: m_RootOrder
       value: 1
