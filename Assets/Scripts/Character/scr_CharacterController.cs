@@ -198,7 +198,6 @@ public class scr_CharacterController : MonoBehaviour
             }
 
             playerStance = PlayerStance.Stand;
-            isCrouching = !isCrouching;
             return;
         }
 
@@ -223,7 +222,6 @@ public class scr_CharacterController : MonoBehaviour
     {
         if(playerStance == PlayerStance.Crouch)
         {
-            isCrouching = !isCrouching;
 
             if (StanceCheck(playerStandStance.StanceCollider.height))
             {
@@ -231,7 +229,7 @@ public class scr_CharacterController : MonoBehaviour
             }
 
             playerStance = PlayerStance.Stand;
-            isCrouching = !isCrouching;
+            return;
         }
 
         if (StanceCheck(playerCrouchStance.StanceCollider.height))
@@ -239,15 +237,12 @@ public class scr_CharacterController : MonoBehaviour
             return;
         }
 
-        isCrouching = !isCrouching;
         playerStance = PlayerStance.Crouch;
-        return;
     }
 
     private void Prone()
     {
         playerStance = PlayerStance.Prone;
-        isCrouching = !isCrouching;
     }
 
     private bool StanceCheck(float stanceCheckheight)
