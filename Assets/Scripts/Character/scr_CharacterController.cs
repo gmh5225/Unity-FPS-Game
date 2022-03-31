@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Models;
+using static scr_Models;
 
 public class scr_CharacterController : MonoBehaviour
 {

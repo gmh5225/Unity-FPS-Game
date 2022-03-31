@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Models
+public static class scr_Models
 {
 
     #region - Player -
@@ -69,6 +69,12 @@ public static class Models
     #endregion
 
     #region - Weapons -
+
+    public enum WeaponFireType
+    {
+        SemiAuto,
+        FullyAuto
+    }
 
     [Serializable]
     public class WeaponSettingsModel

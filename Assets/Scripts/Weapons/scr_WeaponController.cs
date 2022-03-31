@@ -1,5 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using static Models;
+using static scr_Models;
 
 public class scr_WeaponController : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class scr_WeaponController : MonoBehaviour
 
     [Header("References")]
     public Animator weaponAnimator;
+    public GameObject bulletPrefab;
 
     [Header("Settings")]
     public WeaponSettingsModel settings;
@@ -49,9 +52,18 @@ public class scr_WeaponController : MonoBehaviour
     [HideInInspector]
     public bool isAimingIn;
 
+    [Header("Shooting")]
+    public float rateOfFire;
+    private float currentFireRate;
+    public List<WeaponFireType> allowedFireTypes;
+    public WeaponFireType currentFireType;
+
+    #region - Awake / Start / Update -
+
     private void Start()
     {
         newWeaponRotation = transform.localRotation.eulerAngles;
+        currentFireType = allowedFireTypes.First();
     }
 
     public void Initialise(scr_CharacterController CharacterController)
@@ -74,6 +86,10 @@ public class scr_WeaponController : MonoBehaviour
         CalculateAimingIn();
     }
 
+    #endregion
+
+    #region - Aiming In -
+
     private void CalculateAimingIn()
     {
         var targetPosition = transform.position;
@@ -88,11 +104,19 @@ public class scr_WeaponController : MonoBehaviour
         weaponSwayObject.transform.position = weaponSwayPosition + swayPosition;
     }
 
+    #endregion
+
+    #region - Jumping -
+
     public void TriggerJump()
     {
         isGroundedTrigger = false;
         weaponAnimator.SetTrigger("Jumping");
     }
+
+    #endregion
+
+    #region - Rotation -
 
     private void CalculateWeaponRotation()
     {
@@ -116,6 +140,10 @@ public class scr_WeaponController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(newWeaponRotation + newWeaponMovementRotation);
     }
+
+    #endregion
+
+    #region - Animations -
 
     private void SetWeaponAnimations()
     {
@@ -143,6 +171,10 @@ public class scr_WeaponController : MonoBehaviour
         weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
     }
 
+    #endregion
+
+    #region - Sway -
+
     private void CalculateWeaponSway()
     {
         var targetPosition = LissajousCruve(swayTime, swayAmountA, swayAmountB) / (isAimingIn ? swayScale * 6 : swayScale);
@@ -160,4 +192,6 @@ public class scr_WeaponController : MonoBehaviour
     {
         return new Vector3(Mathf.Sin(Time), A * Mathf.Sin(B * Time + Mathf.PI));
     }
+
+    #endregion
 }
