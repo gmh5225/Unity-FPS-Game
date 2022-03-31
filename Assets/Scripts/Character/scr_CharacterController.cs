@@ -61,6 +61,10 @@ public class scr_CharacterController : MonoBehaviour
     [HideInInspector]
     public bool isFalling;
 
+    [Header("Aiming In")]
+    public bool isAimingIn;
+
+
     #region - Awake -
 
     private void Awake()
@@ -74,6 +78,9 @@ public class scr_CharacterController : MonoBehaviour
         defaultInput.Character.Prone.performed += e => Prone();
         defaultInput.Character.Sprint.performed += e => ToggleSprint();
         defaultInput.Character.SprintReleased.performed += e => StopSprint();
+
+        defaultInput.Weapon.Fire2Pressed.performed += e => AimingInPressed();
+        defaultInput.Weapon.Fire2Released.performed += e => AimingInReleased();
 
         defaultInput.Enable();
 
@@ -98,17 +105,44 @@ public class scr_CharacterController : MonoBehaviour
     {
         SetIsGrounded();
         SetIsFalling();
-
         CalculateView();
         CalculateMovement();
         CalculateJump();
         CalculateStance();
+        CalculateAimingIn();
+
+
+    }
+
+    #endregion
+
+    #region - Aiming In -
+
+    private void AimingInPressed()
+    {
+        isAimingIn = true;
+    }
+    
+    private void AimingInReleased()
+    {
+        isAimingIn = false;
+    }
+
+    private void CalculateAimingIn()
+    {
+        if (!currentWeapon)
+        {
+            return;
+        }
+
+        currentWeapon.isAimingIn = isAimingIn;
+
     }
 
     #endregion
 
     #region - IsFalling / isGrounded -
-    
+
     private void SetIsGrounded()
     {
         isGrounded = Physics.CheckSphere(feetTransform.position, playerSettings.isGroundedRadius, groundMask);
