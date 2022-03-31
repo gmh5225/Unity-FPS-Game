@@ -781,16 +781,21 @@ MonoBehaviour:
     WalkingForwardSpeed: 4
     WalkingBackwardSpeed: 2
     WalkingStrafeSpeed: 3
-    JumpingHeight: 6
-    JumpingFallof: 1
-    FallingSmoothing: 1
+    JumpingHeight: 5
+    JumpingFallof: 0.4
+    FallingSmoothing: 0.4
     SpeedEffector: 1
     CrouchSpeedEffector: 0.6
     ProneSpeedEffector: 0.3
     FallingSpeedEffector: 0.4
+    isGroundedRadius: 0.1
+    isFallingSpeed: 0
   viewClampYmin: -70
   viewClampYmax: 80
   playerMask:
+    serializedVersion: 2
+    m_Bits: 119
+  groundMask:
     serializedVersion: 2
     m_Bits: 119
   gravityAmount: 0.03
@@ -807,9 +812,12 @@ MonoBehaviour:
   playerProneStance:
     CameraHeight: -0.7
     StanceCollider: {fileID: 368832841}
+  isSprinting: 0
   isCrouching: 0
   currentWeapon: {fileID: 3250171849395526876}
   weaponAnimationSpeed: 0
+  isGrounded: 0
+  isFalling: 0
 --- !u!143 &583588778
 CharacterController:
   m_ObjectHideFlags: 0

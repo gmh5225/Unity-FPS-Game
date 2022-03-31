@@ -11,7 +11,6 @@ public class scr_CharacterController : MonoBehaviour
     public Vector2 input_Movement;
     [HideInInspector]
     public Vector2 input_View;
-
     private Vector3 newCameraRotation;
     private Vector3 newCharacterRotation;
 
@@ -26,12 +25,12 @@ public class scr_CharacterController : MonoBehaviour
     public float viewClampYmin = -70;
     public float viewClampYmax = 80;
     public LayerMask playerMask;
+    public LayerMask groundMask;
 
     [Header("Gravity")]
     public float gravityAmount;
     public float gravityMin;
     private float playerGravity;
-
     public Vector3 jumpingForce;
     private Vector3 jumpingForceVelocity;
 
@@ -45,21 +44,24 @@ public class scr_CharacterController : MonoBehaviour
     private float stanceCheckErrorMargin = 0.05f;
     private float cameraHeight;
     private float cameraHeightVelocity;
-
     private Vector3 stanceCapsuleCenterVelocity;
     private float stanceCapsuleHeightVelocity;
     [HideInInspector]
     public bool isSprinting;
     [HideInInspector]
     public bool isCrouching;
-
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
 
     [Header("Weapon")]
     public scr_WeaponController currentWeapon;
-
     public float weaponAnimationSpeed;
+    [HideInInspector]
+    public bool isGrounded;
+    [HideInInspector]
+    public bool isFalling;
+
+    #region - Awake -
 
     private void Awake()
     {
@@ -88,6 +90,9 @@ public class scr_CharacterController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region - Update -
 
     private void Update()
     {
@@ -95,23 +100,21 @@ public class scr_CharacterController : MonoBehaviour
         CalculateMovement();
         CalculateJump();
         CalculateStance();
-
-
     }
 
+    #endregion
+
+    #region - View / Movement -
 
     private void CalculateView()
     {
-
         newCharacterRotation.y += playerSettings.ViewXSensitivity * (playerSettings.ViewXInverted ? -input_View.x : input_View.x) * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(newCharacterRotation);
-
 
         newCameraRotation.x += playerSettings.ViewYSensitivity * (playerSettings.ViewYInverted ? input_View.y : -input_View.y) * Time.deltaTime;
         newCameraRotation.x = Mathf.Clamp(newCameraRotation.x, viewClampYmin, viewClampYmax);
 
         cameraHolder.localRotation = Quaternion.Euler(newCameraRotation);
-
     }
 
     private void CalculateMovement()
@@ -120,7 +123,6 @@ public class scr_CharacterController : MonoBehaviour
         {
             isSprinting = false;
         }
-
 
         var verticalSpeed = playerSettings.WalkingForwardSpeed;
         var horizontalSpeed = playerSettings.WalkingStrafeSpeed;
@@ -180,30 +182,13 @@ public class scr_CharacterController : MonoBehaviour
         characterController.Move(movementSpeed);
     }
 
+    #endregion
+
+    #region - Jumping -
+
     private void CalculateJump()
     {
         jumpingForce = Vector3.SmoothDamp(jumpingForce, Vector3.zero, ref jumpingForceVelocity, playerSettings.JumpingFallof);
-    }
-
-    private void CalculateStance()
-    {
-        var currentStance = playerStandStance;
-
-        if(playerStance == PlayerStance.Crouch)
-        {
-            currentStance = playerCrouchStance;
-        }
-        else if (playerStance == PlayerStance.Prone)
-        {
-            currentStance = playerProneStance;
-        }
-
-        cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, currentStance.CameraHeight, ref cameraHeightVelocity, playerStanceSmoothing);
-        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, cameraHeight, cameraHolder.localPosition.z);
-
-        characterController.height = Mathf.SmoothDamp(characterController.height, currentStance.StanceCollider.height, ref stanceCapsuleHeightVelocity, playerStanceSmoothing);
-        characterController.center = Vector3.SmoothDamp(characterController.center, currentStance.StanceCollider.center, ref stanceCapsuleCenterVelocity, playerStanceSmoothing);
-
     }
 
     private void Jump()
@@ -238,7 +223,30 @@ public class scr_CharacterController : MonoBehaviour
         //Jump
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
+    }
 
+    #endregion
+
+    #region - Stance -
+
+    private void CalculateStance()
+    {
+        var currentStance = playerStandStance;
+
+        if(playerStance == PlayerStance.Crouch)
+        {
+            currentStance = playerCrouchStance;
+        }
+        else if (playerStance == PlayerStance.Prone)
+        {
+            currentStance = playerProneStance;
+        }
+
+        cameraHeight = Mathf.SmoothDamp(cameraHolder.localPosition.y, currentStance.CameraHeight, ref cameraHeightVelocity, playerStanceSmoothing);
+        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, cameraHeight, cameraHolder.localPosition.z);
+
+        characterController.height = Mathf.SmoothDamp(characterController.height, currentStance.StanceCollider.height, ref stanceCapsuleHeightVelocity, playerStanceSmoothing);
+        characterController.center = Vector3.SmoothDamp(characterController.center, currentStance.StanceCollider.center, ref stanceCapsuleCenterVelocity, playerStanceSmoothing);
     }
 
     private void Crouch()
@@ -259,7 +267,6 @@ public class scr_CharacterController : MonoBehaviour
         {
             return;
         }
-
         playerStance = PlayerStance.Crouch;
     }
 
@@ -273,9 +280,10 @@ public class scr_CharacterController : MonoBehaviour
         var start = new Vector3(feetTransform.position.x, feetTransform.position.y + characterController.radius + stanceCheckErrorMargin, feetTransform.position.z);
         var end = new Vector3(feetTransform.position.x, feetTransform.position.y - characterController.radius - stanceCheckErrorMargin + stanceCheckheight, feetTransform.position.z);
 
-
         return Physics.CheckCapsule(start, end,characterController.radius, playerMask);
     }
+
+    #endregion
 
     #region - Sprinting -
 
@@ -286,7 +294,6 @@ public class scr_CharacterController : MonoBehaviour
             isSprinting = false;
             return;
         }
-
         isSprinting = !isSprinting;
     }
 
@@ -296,6 +303,15 @@ public class scr_CharacterController : MonoBehaviour
         {
             isSprinting = false;
         }
+    }
+
+    #endregion
+
+    #region - Gizmos -
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(feetTransform.position, playerSettings.isGroundedRadius);
     }
 
     #endregion
