@@ -49,7 +49,7 @@ public class scr_CharacterController : MonoBehaviour
     private Vector3 stanceCapsuleCenterVelocity;
     private float stanceCapsuleHeightVelocity;
     [HideInInspector]
-    private bool isSprinting;
+    public bool isSprinting;
     [HideInInspector]
     public bool isCrouching;
 

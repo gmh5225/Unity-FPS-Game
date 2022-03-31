@@ -781,8 +781,8 @@ MonoBehaviour:
     WalkingForwardSpeed: 4
     WalkingBackwardSpeed: 2
     WalkingStrafeSpeed: 3
-    JumpingHeight: 8
-    JumpingFallof: 10
+    JumpingHeight: 6
+    JumpingFallof: 1
     FallingSmoothing: 1
     SpeedEffector: 1
     CrouchSpeedEffector: 0.6
@@ -809,6 +809,7 @@ MonoBehaviour:
     StanceCollider: {fileID: 368832841}
   isCrouching: 0
   currentWeapon: {fileID: 3250171849395526876}
+  weaponAnimationSpeed: 0
 --- !u!143 &583588778
 CharacterController:
   m_ObjectHideFlags: 0
