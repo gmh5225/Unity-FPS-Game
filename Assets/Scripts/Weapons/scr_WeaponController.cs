@@ -60,8 +60,6 @@ public class scr_WeaponController : MonoBehaviour
 
     private void CalculateWeaponRotation()
     {
-        weaponAnimator.speed = characterController.weaponAnimationSpeed;
-
         targetWeaponRotation.y += settings.SwayAmount * (settings.SwayXInverted ? -characterController.input_View.x : characterController.input_View.x) * Time.deltaTime;
         targetWeaponRotation.x += settings.SwayAmount * (settings.SwayYInverted ? characterController.input_View.y : -characterController.input_View.y) * Time.deltaTime;
 
@@ -106,5 +104,6 @@ public class scr_WeaponController : MonoBehaviour
         }
 
         weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);
+        weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
     }
 }
