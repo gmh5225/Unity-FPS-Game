@@ -10,6 +10,7 @@ public class scr_WeaponController : MonoBehaviour
     [Header("References")]
     public Animator weaponAnimator;
     public GameObject bulletPrefab;
+    public Transform bulletSpawn;
 
     [Header("Settings")]
     public WeaponSettingsModel settings;
@@ -57,6 +58,8 @@ public class scr_WeaponController : MonoBehaviour
     private float currentFireRate;
     public List<WeaponFireType> allowedFireTypes;
     public WeaponFireType currentFireType;
+    [HideInInspector]
+    public bool isShooting;
 
     #region - Awake / Start / Update -
 
@@ -84,6 +87,31 @@ public class scr_WeaponController : MonoBehaviour
         SetWeaponAnimations();
         CalculateWeaponSway();
         CalculateAimingIn();
+        CalculateShooting();
+    }
+
+    #endregion
+
+    #region - Shooting -
+
+    private void CalculateShooting()
+    {
+        if (isShooting)
+        {
+            Shoot();
+
+            if (currentFireType == WeaponFireType.SemiAuto)
+            {
+                isShooting = false;
+            }
+        }
+    }
+
+    private void Shoot()
+    {
+        var bullet = Instantiate(bulletPrefab, bulletSpawn);
+
+        //Load bullet settings
     }
 
     #endregion

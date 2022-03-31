@@ -305,6 +305,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Fire1Pressed",
+                    "type": "Button",
+                    "id": "4d943cc3-5ec9-4a20-9928-693b6c43c469",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire1Released",
+                    "type": "Button",
+                    "id": "e253755e-5242-40db-8fa4-28973241e205",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -327,6 +345,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire2Released",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89d84df3-30f8-40db-bcff-cc6866b6e2c9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire1Pressed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "781a7537-bf7d-4d20-b894-0910a786fb43",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire1Released",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
