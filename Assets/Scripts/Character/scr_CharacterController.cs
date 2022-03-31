@@ -17,6 +17,7 @@ public class scr_CharacterController : MonoBehaviour
 
     [Header("References")]
     public Transform cameraHolder;
+    public Transform camera;
     public Transform feetTransform;
 
 
@@ -61,6 +62,18 @@ public class scr_CharacterController : MonoBehaviour
     [HideInInspector]
     public bool isFalling;
 
+    [Header("Leaning")]
+    public Transform leanPivot;
+    private float currentLean;
+    private float targetLean;
+    public float leanAngle;
+    public float leanSmoothing;
+    private float leanVelocity;
+
+    private bool isLeaningLeft;
+    private bool isLeaningRight;
+
+
     [Header("Aiming In")]
     public bool isAimingIn;
 
@@ -81,6 +94,12 @@ public class scr_CharacterController : MonoBehaviour
 
         defaultInput.Weapon.Fire2Pressed.performed += e => AimingInPressed();
         defaultInput.Weapon.Fire2Released.performed += e => AimingInReleased();
+
+        defaultInput.Character.LeanLeftPressed.performed += e => isLeaningLeft = true;
+        defaultInput.Character.LeanLeftReleased.performed += e => isLeaningLeft = false;
+
+        defaultInput.Character.LeanRightPressed.performed += e => isLeaningRight = true;
+        defaultInput.Character.LeanRightReleased.performed += e => isLeaningRight = false;
 
         defaultInput.Enable();
 
@@ -110,7 +129,7 @@ public class scr_CharacterController : MonoBehaviour
         CalculateJump();
         CalculateStance();
         CalculateAimingIn();
-
+        CalculateLeaning();
 
     }
 
@@ -235,6 +254,33 @@ public class scr_CharacterController : MonoBehaviour
         movementSpeed += jumpingForce * Time.deltaTime;
 
         characterController.Move(movementSpeed);
+    }
+
+    #endregion
+
+    #region - Leaning -
+
+    private void CalculateLeaning()
+    {
+        if(isLeaningLeft)
+        {
+            targetLean = leanAngle;
+
+        }
+        else if (isLeaningRight)
+        {
+            targetLean = -leanAngle;
+
+        }
+        else
+        {
+            targetLean = 0;
+
+        }
+
+        currentLean = Mathf.SmoothDamp(currentLean, targetLean, ref leanVelocity, leanSmoothing);
+
+        leanPivot.localRotation = Quaternion.Euler(new Vector3(0, 0,currentLean));
     }
 
     #endregion
