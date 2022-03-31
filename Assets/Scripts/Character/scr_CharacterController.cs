@@ -59,6 +59,8 @@ public class scr_CharacterController : MonoBehaviour
     [Header("Weapon")]
     public scr_WeaponController currentWeapon;
 
+    public float weaponAnimationSpeed;
+
     private void Awake()
     {
         defaultInput = new DefaultInput();
@@ -146,6 +148,13 @@ public class scr_CharacterController : MonoBehaviour
         else
         {
             playerSettings.SpeedEffector = 1;
+        }
+
+        weaponAnimationSpeed = characterController.velocity.magnitude / (playerSettings.WalkingForwardSpeed * playerSettings.SpeedEffector);
+
+        if(weaponAnimationSpeed> 1)
+        {
+            weaponAnimationSpeed = 1;
         }
 
         verticalSpeed *= playerSettings.SpeedEffector;
