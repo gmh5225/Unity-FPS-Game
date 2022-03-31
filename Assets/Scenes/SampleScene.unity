@@ -789,7 +789,7 @@ MonoBehaviour:
     ProneSpeedEffector: 0.3
     FallingSpeedEffector: 0.4
     isGroundedRadius: 0.1
-    isFallingSpeed: 0
+    isFallingSpeed: 1
   viewClampYmin: -70
   viewClampYmax: 80
   playerMask:

@@ -25,6 +25,9 @@ public class scr_WeaponController : MonoBehaviour
     Vector3 targetWeaponMovementRotation;
     Vector3 targetWeaponMovementRotationVelocity;
 
+    private bool isGroundedTrigger;
+
+    private float fallingDelay;
 
     private void Start()
     {
@@ -47,6 +50,12 @@ public class scr_WeaponController : MonoBehaviour
 
         CalculateWeaponRotation();
         SetWeaponAnimations();
+    }
+
+    public void TriggerJump()
+    {
+        isGroundedTrigger = false;
+        weaponAnimator.SetTrigger("Jumping");
     }
 
     private void CalculateWeaponRotation()
@@ -76,6 +85,26 @@ public class scr_WeaponController : MonoBehaviour
 
     private void SetWeaponAnimations()
     {
+        if (isGroundedTrigger)
+        {
+            fallingDelay = 0;
+        }
+        else
+        {
+            fallingDelay += Time.deltaTime;
+        }
+
+        if (characterController.isGrounded && !isGroundedTrigger && fallingDelay > 0.1f)
+        {
+            weaponAnimator.SetTrigger("Landing");
+            isGroundedTrigger = true;
+        }
+        else if (!characterController.isGrounded && isGroundedTrigger)
+        {
+            weaponAnimator.SetTrigger("Falling");
+            isGroundedTrigger = false;
+        }
+
         weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);
     }
 }

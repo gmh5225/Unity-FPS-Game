@@ -96,10 +96,27 @@ public class scr_CharacterController : MonoBehaviour
 
     private void Update()
     {
+        SetIsGrounded();
+        SetIsFalling();
+
         CalculateView();
         CalculateMovement();
         CalculateJump();
         CalculateStance();
+    }
+
+    #endregion
+
+    #region - IsFalling / isGrounded -
+    
+    private void SetIsGrounded()
+    {
+        isGrounded = Physics.CheckSphere(feetTransform.position, playerSettings.isGroundedRadius, groundMask);
+    }    
+    
+    private void SetIsFalling()
+    {
+        isFalling = (!isGrounded && characterController.velocity.magnitude >= playerSettings.isFallingSpeed);
     }
 
     #endregion
@@ -135,7 +152,7 @@ public class scr_CharacterController : MonoBehaviour
 
         //Effectors
 
-        if (!characterController.isGrounded)
+        if (!isGrounded)
         {
             playerSettings.SpeedEffector = playerSettings.FallingSpeedEffector;
         }
@@ -162,7 +179,7 @@ public class scr_CharacterController : MonoBehaviour
         verticalSpeed *= playerSettings.SpeedEffector;
         horizontalSpeed *= playerSettings.SpeedEffector;
 
-        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horizontalSpeed * input_Movement.x * Time.deltaTime, 0, verticalSpeed * input_Movement.y * Time.deltaTime), ref newMovementSpeedVelocity, characterController.isGrounded ? playerSettings.MovementSmoothing : playerSettings.FallingSmoothing);
+        newMovementSpeed = Vector3.SmoothDamp(newMovementSpeed, new Vector3(horizontalSpeed * input_Movement.x * Time.deltaTime, 0, verticalSpeed * input_Movement.y * Time.deltaTime), ref newMovementSpeedVelocity, isGrounded ? playerSettings.MovementSmoothing : playerSettings.FallingSmoothing);
         var movementSpeed = transform.TransformDirection(newMovementSpeed);
 
         if (playerGravity > gravityMin)
@@ -170,7 +187,7 @@ public class scr_CharacterController : MonoBehaviour
             playerGravity -= gravityAmount * Time.deltaTime;
         }
 
-        if(playerGravity <-0.1f && characterController.isGrounded)
+        if(playerGravity <-0.1f && isGrounded)
         {
             playerGravity = -0.1f;
 
@@ -193,7 +210,7 @@ public class scr_CharacterController : MonoBehaviour
 
     private void Jump()
     {
-        if (!characterController.isGrounded)
+        if (!isGrounded)
         {
             return;
         }
@@ -223,6 +240,7 @@ public class scr_CharacterController : MonoBehaviour
         //Jump
         jumpingForce = Vector3.up * playerSettings.JumpingHeight;
         playerGravity = 0;
+        currentWeapon.TriggerJump();
     }
 
     #endregion
