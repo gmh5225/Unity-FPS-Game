@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static scr_Models;
 
 public class scr_CharacterController : MonoBehaviour
@@ -19,6 +20,7 @@ public class scr_CharacterController : MonoBehaviour
     public Transform cameraHolder;
     public Transform camera;
     public Transform feetTransform;
+    public Image crosshair;
 
 
     [Header("Settings")]
@@ -133,6 +135,7 @@ public class scr_CharacterController : MonoBehaviour
         CalculateStance();
         CalculateAimingIn();
         CalculateLeaning();
+        //CalculateCrosshair();
 
     }
 
@@ -163,11 +166,13 @@ public class scr_CharacterController : MonoBehaviour
 
     private void AimingInPressed()
     {
+        crosshair.gameObject.SetActive(false);
         isAimingIn = true;
     }
     
     private void AimingInReleased()
     {
+        crosshair.gameObject.SetActive(true);
         isAimingIn = false;
     }
 
@@ -441,4 +446,12 @@ public class scr_CharacterController : MonoBehaviour
     }
 
     #endregion
+
+    //private void CalculateCrosshair()
+    //{
+    //    if (isAimingIn)
+    //    {
+    //        crosshair.enabled = !crosshair.enabled;
+    //    }
+    //}
 }
