@@ -135,7 +135,6 @@ public class scr_CharacterController : MonoBehaviour
         CalculateStance();
         CalculateAimingIn();
         CalculateLeaning();
-        //CalculateCrosshair();
 
     }
 
@@ -167,12 +166,29 @@ public class scr_CharacterController : MonoBehaviour
     private void AimingInPressed()
     {
         crosshair.gameObject.SetActive(false);
+        if (playerStance == PlayerStance.Stand || playerStance == PlayerStance.Prone)
+        {
+            isCrouching = false;
+        }
+        else if (playerStance ==PlayerStance.Crouch)
+        {
+            isCrouching = true;
+        }
+            
         isAimingIn = true;
     }
     
     private void AimingInReleased()
     {
         crosshair.gameObject.SetActive(true);
+        if (playerStance == PlayerStance.Stand || playerStance == PlayerStance.Prone)
+        {
+            isCrouching = false;
+        }
+        else if (playerStance == PlayerStance.Crouch)
+        {
+            isCrouching = true;
+        }
         isAimingIn = false;
     }
 
@@ -336,6 +352,7 @@ public class scr_CharacterController : MonoBehaviour
             }
 
             playerStance = PlayerStance.Stand;
+            isCrouching = false;
             return;
         }
 
@@ -347,6 +364,7 @@ public class scr_CharacterController : MonoBehaviour
             }
 
             playerStance = PlayerStance.Stand;
+            isCrouching = false;
             return;
         }
 
@@ -384,6 +402,7 @@ public class scr_CharacterController : MonoBehaviour
     {
         if(playerStance == PlayerStance.Crouch)
         {
+            isCrouching = true;
 
             if (StanceCheck(playerStandStance.StanceCollider.height))
             {
@@ -391,6 +410,8 @@ public class scr_CharacterController : MonoBehaviour
             }
 
             playerStance = PlayerStance.Stand;
+            isCrouching = false;
+
             return;
         }
 
@@ -399,11 +420,13 @@ public class scr_CharacterController : MonoBehaviour
             return;
         }
         playerStance = PlayerStance.Crouch;
+        isCrouching = true;
     }
 
     private void Prone()
     {
         playerStance = PlayerStance.Prone;
+        isCrouching = false;
     }
 
     private bool StanceCheck(float stanceCheckheight)
@@ -447,11 +470,4 @@ public class scr_CharacterController : MonoBehaviour
 
     #endregion
 
-    //private void CalculateCrosshair()
-    //{
-    //    if (isAimingIn)
-    //    {
-    //        crosshair.enabled = !crosshair.enabled;
-    //    }
-    //}
 }
