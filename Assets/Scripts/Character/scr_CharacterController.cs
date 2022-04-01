@@ -165,31 +165,33 @@ public class scr_CharacterController : MonoBehaviour
 
     private void AimingInPressed()
     {
-        crosshair.gameObject.SetActive(false);
-        if (playerStance == PlayerStance.Stand || playerStance == PlayerStance.Prone)
-        {
-            isCrouching = false;
-        }
-        else if (playerStance ==PlayerStance.Crouch)
-        {
-            isCrouching = true;
-        }
-            
         isAimingIn = true;
+        crosshair.gameObject.SetActive(false);
+        isCrouching = false;
+
+        //if (playerStance == PlayerStance.Stand || playerStance == PlayerStance.Prone)
+        //{
+        //    isCrouching = false;
+        //}
+        //else if (playerStance ==PlayerStance.Crouch)
+        //{
+        //    isCrouching = true;
+        //}
     }
     
     private void AimingInReleased()
     {
-        crosshair.gameObject.SetActive(true);
-        if (playerStance == PlayerStance.Stand || playerStance == PlayerStance.Prone)
-        {
-            isCrouching = false;
-        }
-        else if (playerStance == PlayerStance.Crouch)
-        {
-            isCrouching = true;
-        }
         isAimingIn = false;
+        crosshair.gameObject.SetActive(true);
+        isCrouching = false;
+        //if (playerStance == PlayerStance.Stand || playerStance == PlayerStance.Prone)
+        //{
+        //    isCrouching = false;
+        //}
+        //else if (playerStance == PlayerStance.Crouch)
+        //{
+        //    isCrouching = true;
+        //}
     }
 
     private void CalculateAimingIn()
@@ -402,7 +404,7 @@ public class scr_CharacterController : MonoBehaviour
     {
         if(playerStance == PlayerStance.Crouch)
         {
-            isCrouching = true;
+            //isCrouching = true;
 
             if (StanceCheck(playerStandStance.StanceCollider.height))
             {
@@ -470,4 +472,9 @@ public class scr_CharacterController : MonoBehaviour
 
     #endregion
 
+
+
+    private void CalculateCrouch()
+    { 
+    }
 }
