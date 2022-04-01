@@ -84,6 +84,8 @@ public class scr_CharacterController : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
+
         defaultInput = new DefaultInput();
 
         defaultInput.Character.Movement.performed += e => input_Movement = e.ReadValue<Vector2>();
