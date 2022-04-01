@@ -474,9 +474,4 @@ public class scr_CharacterController : MonoBehaviour
 
     #endregion
 
-
-
-    private void CalculateCrouch()
-    { 
-    }
 }

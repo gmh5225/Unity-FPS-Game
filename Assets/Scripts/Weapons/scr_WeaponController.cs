@@ -194,7 +194,6 @@ public class scr_WeaponController : MonoBehaviour
             weaponAnimator.SetTrigger("Falling");
             isGroundedTrigger = false;
         }
-
         weaponAnimator.SetBool("IsSprinting", characterController.isSprinting);
         weaponAnimator.SetBool("IsCrouching", characterController.isCrouching);
         weaponAnimator.SetFloat("WeaponAnimationSpeed", characterController.weaponAnimationSpeed);
